@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+    <div class="flex bg-gray-100 p-10">
+        <div class="bg-white mx-auto p-8 rounded-lg shadow-lg w-96">
+            <h2 class="text-2xl font-bold mb-4 text-center">{% trans "Sign In" %}</h2>
+            <p class="mb-6 text-center text-gray-600">{% trans "If you have not created an account yet, then please sign up first." %}</p>
+            <form method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="mb-4">
+                    <label for="id_login" class="block text-gray-700">{% trans "Email" %}</label>
+                    <input type="text" name="login" id="id_login" class="w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="id_password" class="block text-gray-700">{% trans "Password" %}</label>
+                    <input type="password" name="password" id="id_password" class="w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4 text-right">
+                    <a href="{% url 'account_reset_password' %}" class="text-blue-500 hover:underline">{% trans "Forgot your password?" %}</a>
+                </div>
+                <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200">{% trans "Sign In" %}</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

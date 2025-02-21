@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block body %}
+<div class="flex bg-gray-100 p-10">
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4 text-gray-800">Edit Your Profile</h1>
+        
+        <form method="POST" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            
+            <div>
+                <label for="username" class="block text-gray-600 font-semibold">Username</label>
+                <input type="text" id="username" name="username" value="{{ user.username }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="first_name" class="block text-gray-600 font-semibold">First Name</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="last_name" class="block text-gray-600 font-semibold">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="email" class="block text-gray-600 font-semibold">Email</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div class="mt-4">
+                <label for="profile_image" class="block text-gray-600 font-semibold">Profile Image</label>
+                <div class="flex items-center space-x-4">
+                    <img src="{{ user.profile.image.url }}" alt="Profile Image" class="w-16 h-16 rounded-full">
+                    <input type="file" id="profile_image" name="profile_image" class="p-2 border rounded-lg">
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h2 class="text-xl font-bold text-gray-700">Change Password</h2>
+                <div>
+                    <label for="old_password" class="block text-gray-600 font-semibold">Old Password</label>
+                    <input type="password" id="old_password" name="old_password" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-200">
+                </div>
+                <div>
+                    <label for="new_password" class="block text-gray-600 font-semibold">New Password</label>
+                    <input type="password" id="new_password" name="new_password" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-200">
+                </div>
+                <div>
+                    <label for="new_password_confirm" class="block text-gray-600 font-semibold">Confirm New Password</label>
+                    <input type="password" id="new_password_confirm" name="new_password_confirm" class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-200">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
+                Save Changes
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
